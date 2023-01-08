@@ -14,18 +14,22 @@
 # ---
 
 # +
-# N명이 줄서있음, 줄서는 순서에 따라 필요한 시간의 합이 달라지
+# 11399 ATM
+
+# 돈을 인출하는데 필요한 시간의 합 최소로 만들기
+# 누적되니까 오름차순 정렬하면 됨
+
+# 3 1 4 3 2-> 3+4+8+11+13=39
+# 1 2 3 3 4-> 1+3+6+9+13=32
 
 N=int(input())
+money=list(map(int, input().split()))
 
-timee=list(map(int, input().split()))
-timee.sort()
-
+money.sort()
 result=0
-best=0
-
-for time in timee:
-    result += time
-    best += result
+new=0
+for i in money:
+    result +=i
+    new += result
     
-print(best)
+print(new)
