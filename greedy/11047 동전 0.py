@@ -14,27 +14,28 @@
 # ---
 
 # +
-# K로 만들기 위한 최소한의 동전 개수
+# 11047 동전 0
 
-N, K=map(int, input().split())
+# 가진 동전 종류 N, 합을 K로 만들기, 필요한 동전 개수의 최솟값
+# 동전 내림차순 정렬해서, K보다 크면 패스, K보다 작으면 계산
+
+N,K=map(int, input().split())
 money=[]
 result=0
-
 for i in range(N):
     money.append(int(input()))
     
 money.sort(reverse=True)
 
-for moneyy in money:
-    if K // moneyy ==0:
-        continue
-    target=(K // moneyy)
-    result += target
-    
-    K= K % moneyy
-    
+for i in money:
     if K==0:
         break
-        
+    if i>K:
+        continue
+    result +=(K//i)
+    K=(K%i)
 print(result)
+
+# -
+
 
