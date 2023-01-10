@@ -14,26 +14,21 @@
 # ---
 
 # +
-# 여기서 하나의 과정이 더 필요하다
+# 1541 잃어버린 괄호
+# 괄호를 적절히 쳐서 값을 최소로 만들자
+# 빼기 앞에 괄호를 치면 되는데
 S=input().split('-')
 
-result_B=0
-
+result=0
 for i in range(len(S)):
     result=0
     A=S[i].split('+')
-    # 더할거 없으면 밑에 연산 안함
-    if len(A)==1:
-        continue
     for j in A:
-        result += int(j)
+        result +=int(j)
     S[i]=result
 
-result_B=int(S[0])
+answer=S[0]
 for i in range(1, len(S)):
-    result_B -= int(S[i])
+    answer -=S[i]
+print(answer)
     
-print(result_B)
-# -
-
-print(int('00009'))
