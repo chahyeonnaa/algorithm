@@ -20,6 +20,10 @@
 # 배추들이 몇 군데 퍼져있는지만 알면 됨(얼려먹기랑 같은 유형)
 # 일단 그래프 먼저 만들어보자
 # 답은 나오는데 왜 런타임 에러가 나는지 이유를 모르겠다........ㅜ....
+import sys
+# 이거 붙여야 런타임 에러 통과함
+# 파이썬의 기본 재귀 한도 : 1000, 재귀 깊이가 1000을 넘어갈 경우에는 모듈을 따로 추가해야함!
+sys.setrecursionlimit(10000)
 def dfs(x,y):
     if x<=-1 or x>=N or y<=-1 or y>=M:
         return False
@@ -52,3 +56,6 @@ for i in range(T):
             if dfs(w,q) ==True:
                 result +=1
     print(result)
+# -
+
+
