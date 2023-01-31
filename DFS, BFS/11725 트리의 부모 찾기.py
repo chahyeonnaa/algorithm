@@ -29,8 +29,10 @@ for i in range(2, N+1):
 
 # +
 # 파이썬 3 - 시간초과. 왜지??????/
+import sys
+input=sys.stdin.readline
 from collections import deque
-def bfs(a, visited):
+def bfs(a, visited,graph):
     queue=deque([a])
     
     while queue:
@@ -40,7 +42,7 @@ def bfs(a, visited):
                 visited[i]=v
                 queue.append(i)
                 
-
+                
 N=int(input())
 visited=[0]*(N+1)
 graph=[[] for _ in range(N+1)]
@@ -50,7 +52,7 @@ for i in range(N-1):
     graph[A].append(B)
     graph[B].append(A)
     
-bfs(1, visited)
+bfs(1, visited,graph)
 for i in range(2,N+1):
     print(visited[i])
 
