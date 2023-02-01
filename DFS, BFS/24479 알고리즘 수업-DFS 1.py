@@ -14,32 +14,48 @@
 # ---
 
 # +
-# 런타임에러
-def dfs(R,visited,graph):
-    visited[R]=True
-    print(R)
+# 런타임에러만 졸라 돌려봤네...
+# 너무 예시에 맞춰진 생각만한다...ㅠㅠㅠㅠㅠㅠ
+# 왜그런지 생각 좀 하자 진짜
+# dfs에서 재귀 허용 깊이 수동으로 늘려주는건 필수다.
+# 내 풀이는 틀렸음. 전역변수가 필요하다.
+import sys
+sys.setrecursionlimit(10 ** 9)
+input = sys.stdin.readline
+
+def dfs(R):
+    global count
+    visited[R]=count
 
     for i in graph[R]:
-        if not visited[i]:
-            dfs(i,visited,graph)
+        if visited[i]==0:
+            count+=1
+            dfs(i)
+            
             
 N,M,R=map(int, input().split())
-visited=[False]*(N+1)
-graph=[[]*N for _ in range(N+1)]
+visited=[0]*(N+1)
+graph=[[] for _ in range(N+1)]
+count=1
 
 for _ in range(M):
     A,B=map(int, input().split())
     graph[A].append(B)
     graph[B].append(A)
 
-for i in range(M):
-    graph[i].sort()
-    
-dfs(R,visited,graph)
+# 아 여기서... 인덱스 에러였음...
+# for i in range(M):
+#     graph[i].sort()
+
+for g in graph:
+    g.sort()
+
+dfs(R)
 
 for i in range(1,N+1):
-    if visited[i]==False:
-        print(0)
+    print(visited[i])
 # -
+
+
 
 
