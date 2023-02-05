@@ -58,5 +58,24 @@ print(count)
 
 # +
 # 투포인터로 풀어야하는 문제임
+N=int(input())
+M=int(input())
 
+S=list(map(int, input().split()))
+S.sort()
+
+result=0
+i,j=0,n-1
+
+while i<j:
+    if S[i]+S[j]==M:
+        result+=1
+        i+=1
+        j-=1
+    elif S[i]+S[j]<M:
+        i+=1
+    else:
+        j-=1
+        
+print(result)
 
