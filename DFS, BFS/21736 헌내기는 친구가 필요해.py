@@ -17,7 +17,8 @@
 # 상하좌우 이동가능, 도연이가 만날 수 있는 사람의 수 출력
 # 0 빈공간, X 벽, I 도연이, P 사람
 # 0이면 이동가능, P를 만나면 카운트
-# bfs로 풀어야징
+# bfs로 풀어야징 - n번의 시도 끝에 성공..
+# 아 반복문 조건 걸기전에 한번 더 생각하자, == 보단 != 아게 오류를 줄인다.
 from collections import deque
 def bfs(x,y):
     global count
@@ -27,19 +28,15 @@ def bfs(x,y):
     while queue:
         x,y=queue.popleft()
         
-        for i in range(4):
+        for i in range(4): 
             nx=x+dx[i]
             ny=y+dy[i]
             
-            if nx<0 or ny<0 or nx>=N or ny>=M:
+            if nx<0 or ny<0 or nx>=N or ny>=M or graph[nx][ny]==-1:
                 continue    
-            # 아 여기서 걸린다. X로 둘러싸인 P..어떻게 제한해주지? 
-            # 어떻게 제한을 걸지..?
-            if graph[nx][ny]=="X":
-                continue
             if graph[nx][ny]=="P":
                 count+=1
-            if graph[nx][ny]=="0":
+            if graph[nx][ny] != "X":
                 graph[nx][ny]=-1
                 queue.append((nx,ny))
                 
@@ -59,6 +56,7 @@ for i in range(N):
     for j in range(M):
         if graph[i][j]=="I":
             bfs(i,j)
+            break
         
         
 if count==0:
@@ -66,5 +64,6 @@ if count==0:
 else:
     print(count)
 # -
+
 
 
