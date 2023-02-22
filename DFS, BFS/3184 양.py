@@ -26,7 +26,7 @@ from collections import deque
 def bfs(x,y):
     v=0
     o=0
-    
+
     queue=deque()
     queue.append((x,y))
     
@@ -44,17 +44,19 @@ def bfs(x,y):
             nx=x+dx[i]
             ny=y+dy[i]
             
-            if nx<0 or ny<0 or nx>=R or ny>=C:
+            if nx<0 or ny<0 or nx>=R or ny>=C or graph[nx][ny]=="#":
                 continue
-            if 0 <= nx < R and 0 <= ny < C:
-                if graph[nx][ny]=="v":
-                    graph[nx][ny]="#"
-                    v+=1
-                if graph[nx][ny]=="o":
-                    graph[nx][ny]="#"
-                    o+=1
+            if graph[nx][ny]==".":
+                graph[nx][ny]="#"
                 queue.append((nx,ny))
-                
+            elif graph[nx][ny]=="v":
+                queue.append((nx,ny)) 
+                graph[nx][ny]="#"
+                v+=1
+            elif graph[nx][ny]=="o":
+                queue.append((nx,ny)) 
+                graph[nx][ny]="#"
+                o+=1 
     return v,o
 
 
@@ -62,6 +64,7 @@ R,C=map(int, input().split())
 graph=[]
 dx=[-1,1,0,0]
 dy=[0,0,-1,1]
+
 result_v=0
 result_o=0
 
@@ -70,7 +73,7 @@ for i in range(R):
 
 for i in range(R):
     for j in range(C):
-        if graph[i][j]!="#":
+        if graph[i][j] !="#":
             A,B= bfs(i,j)
             # 늑대가 더 많으면, 늑대는 다 생존
             if A>=B:
