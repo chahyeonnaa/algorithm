@@ -15,24 +15,29 @@
 
 # +
 # 74퍼에서 틀림. 왜지?
+# 도대ㅊ ㅔ어디가 틀린건데.
+# 와 ㅅㅂ... 서브테스크 문제는 서브테스크 조건도 잘 봐야함 ㅠㅠ
+# 반복문 돌릴 때 점의 개수 안맞춰줘서 한참을 헤맸다.....
 N=int(input())
-S=[[] for _ in range(N+1)]
+S=[[]*(N+1) for _ in range(N+1)]
 for _ in range(N):
     A,B=map(int, input().split())
     S[B].append(A)
     
 result=0
-for i in range(N):
+for i in range(1,N+1):
     S[i].sort()
     R=len(S[i])
-    if R>=2:
-        result += (S[i][1]-S[i][0])
-        result += (S[i][R-1]-S[i][R-2])
-        for j in range(1,R-1):
+    for j in range(R):
+        if j== 0:
+            result += (S[i][1]-S[i][0])
+        elif j== R-1:
+            result += (S[i][R-1]-S[i][R-2])
+        else:
             Q=S[i][j]-S[i][j-1]
             W=S[i][j+1]-S[i][j]
             result += min(Q,W)
+print(S)
 print(result)
 # -
-
 
