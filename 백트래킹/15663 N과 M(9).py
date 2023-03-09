@@ -18,21 +18,20 @@ def dfs():
     if len(result)==M:
         print(*result)
         return
-    A=0
     for i in range(N):
-        if visited[i]==0 and A !=S[i]:
+        if visited[i]==0 and A!=S[]:
+            A=S[i]
             visited[i]=1
             result.append(S[i])
-            A=S[i]
             dfs()
-            visited[i]=0
             result.pop()
-            
+            visited[i]=0
+        
 N,M=map(int, input().split())
 S=list(map(int, input().split()))
 S.sort()
-visited=[0]*N
 result=[]
+visited=[0]*N
 dfs()
 # -
 
