@@ -27,6 +27,7 @@ def dfs(depth, start):
         if result>abs(sin-son):
             result=abs(sin-son)
         return
+    # for문에 매개변수 쓰는 이유 : 1234일때 12랑 21이랑 같게 취급하는 경우!
     for i in range(start, N):
         arr.append(S[i])
         dfs(depth+1, i+1)
