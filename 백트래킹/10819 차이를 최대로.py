@@ -13,25 +13,34 @@
 #     name: python3
 # ---
 
-N=int(input())
-S=list(map(int, input().split()))
-result=[]
-visited=[0]*N
-number=0
+# +
+# 모든 경우 다 해봐야함!
+# 똑같은거 못 뽑음 -> visited 체커 활용
 def dfs():
-    global number
+    global R
     if len(result)==N:
-        total=0
+        sum_m=0
         for i in range(N-1):
-            total += abs(S[i]-S[i-1])
-        number = max(number, total)
+            sum_m += abs(result[i]-result[i-1])
+        R=max(sum_m,R)
         return
-        
+    
     for i in range(N):
         if visited[i]==0:
             result.append(S[i])
             visited[i]=1
             dfs()
-            result.pop()
             visited[i]=0
-print(number)
+            result.pop()
+        
+N=int(input())
+S=list(map(int, input().split()))
+result=[]
+R=0
+visited=[0]*N
+dfs()
+print(R)
+
+# -
+
+
