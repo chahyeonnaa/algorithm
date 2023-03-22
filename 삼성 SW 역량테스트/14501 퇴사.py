@@ -48,6 +48,7 @@ for i in range(1, N+1):
 print(result)
 
 # +
+# 이렇게 하면 안되는 케이스 너무 많다. 
 N=int(input())
 T=[0]*(N+1)
 M=[0]*(N+1)
@@ -72,6 +73,32 @@ for i in range(1, N+1):
         i=time
     result=max(money, result)
 print(result)
+
+# +
+# DP 쓰는 문제
+# 뒤에서부터 그 날 상담을 했을 때, 앞으로의 최댓값을 dp에 저장하는거임
+# 4일째 상담을 했으면, 5일날 상담 가능
+# 3일째 상담을 했으면, 4일 5일 가능
+# 2일째 상담을 하면 2일만 가능 -> 20, 2일은 3일보다 값이 작으니까 dp값을 안바꿈
+# DP : 큰 문제를 작은 문제로 나누고, 작은 문제를 반복해서 문제를 해결해나감
+# 작은 문제는 딱 한번만 풀어야하고, 그 결과는 어딘가(dp)에 기록해야함
+N=int(input())
+T=[]
+M=[]
+dp=[]
+for i in range(N):
+    A,B=map(int, input().split())
+    T.append(A)
+    M.append(B)
+    dp.append(B)
+dp.append(0)
+
+for i in range(N-1, -1, -1):
+    if T[i]+i>N:
+        dp[i]=dp[i+1]
+    else:
+        dp[i]=max(dp[i+1], M[i]+dp[i+T[i]])
+print(dp[0])
 # -
 
 # ###### 
