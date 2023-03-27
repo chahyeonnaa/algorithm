@@ -13,8 +13,6 @@
 #     name: python3
 # ---
 
-
-
 # +
 # 전형적인 시뮬레이션 문제! 
 # 알고리즘 없이 문제에서 요구하는 내용을 오류없이 성실하게 구현만 할 수 있다면 풀 수 있음
@@ -47,3 +45,48 @@
 # 벽 아니면, 현 위치 갱신
 
 
+
+# +
+N,M=map(int, input().split())
+r,c,d=map(int, input().split())
+graph=[]
+visited=[[0]*M for _ in range(N)]
+# 북 동 남 서
+dr=[-1,0,1,0]
+dc=[0,1,0,-1]
+cnt=1
+
+# 처음 위치 방문 표시 해야한다
+visited[r][c]=1
+
+for i in range(N):
+    graph.append(list(map(int, input().split())))
+    
+while True:
+    flag=0
+    
+    for _ in range(4):
+        d=(d+3)%4
+        nr=r+dr[d]
+        nc=c+dc[d]
+        
+        if visited[nr][nc]==0:
+            if graph[nr][nc]==0 and nr>=0 and nr<N and nc>=0 and nc<M:
+                visited[nr][nc]=1
+                cnt +=1
+                flag=1
+                r=nr
+                c=nc
+                break
+    if flag==0:
+        if graph[r-dr[d]][c-dc[d]]==1:
+            break
+        else:
+            r=r-dr[d]
+            c=c-dc[d]
+        
+print(cnt)
+    
+# -
+
+# # 
