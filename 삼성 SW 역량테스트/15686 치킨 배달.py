@@ -46,6 +46,49 @@ for x in combinations(chicken, M):
     result=min(result, city_r)
     
 print(result)
+# +
+# itertools 안쓰고 dfs로 조합 구현하기
+# 어떻게 조금만 바껴도 이렇게 하나도 모르겠지 진짜 ㅋ ㅜㅜㅜ
+def dfs(n,i):
+    global result
+    if n==M:
+        city_r=0
+        for h in house:
+            h_r=1e9
+            # 집 마다 치킨 집들과의 거리 구하기
+            for k in select:
+                h_r=min(h_r, abs(h[0]-k[0])+abs(h[1]-k[1]))
+            city_r += h_r
+        
+        result=min(result, city_r)
+        return
+        
+    for idx in range(i,K):
+        select.append(chicken[idx])
+        dfs(n+1, idx+1)
+        select.pop()
+
+N,M=map(int, input().split())
+city=[]
+house=[]
+chicken=[]
+select=[]
+result=1e9
+for i in range(N):
+    city.append(list(map(int, input().split())))
+    
+for i in range(N):
+    for j in range(N):
+        if city[i][j]==1:
+            house.append([i,j])
+        elif city[i][j]==2:
+            chicken.append([i,j])
+            
+K=len(chicken)
+for i in range(K):
+    dfs(0,i)
+print(result)
 # -
+
 
 
